@@ -1,0 +1,15 @@
+{
+    "name": "kiki/skripsi",
+    "license": "tidak ada",
+    "authors": [
+        {
+            "name": "refky",
+            "email": "shiejacko@gmail.com"
+        }
+    ],
+    "require": {
+        "joshcam/mysqli-database-class": "*",
+        "josantonius/session": "^1.1",
+        "verot/class.upload.php": "dev-master"
+    }
+}

@@ -3,3 +3,4 @@
 /.vagrant
 env.php
 composer.lock
+composer.phar
