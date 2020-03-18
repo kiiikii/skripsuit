@@ -3,7 +3,7 @@
 	defined('env') OR exit('Akses langsung script ini diblokir');
 
 	$setdb['db_host'] = '127.0.0.1';
-	$setdb['db_name'] = '';
+	$setdb['db_name'] = 'etpu';
 	$setdb['db_user'] = 'root';
 	$setdb['db_password'] = '';
 
