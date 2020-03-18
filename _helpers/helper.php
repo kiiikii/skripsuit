@@ -2,13 +2,13 @@
 
 	function base_url($a = '') {
 
-		$getbase_url = $GLOBALS['setUri']['base'];
+		$getbase_url = $GLOBALS['seturi']['base'];
 		return $getbase_url . $a;
 	}
 
 	function assets($a = '') {
 
-		$getbase_assets = $GLOBALS['setUri']['assets'];
+		$getbase_assets = $GLOBALS['seturi']['assets'];
 		return base_url($getbase_assets . $a);
 	}
 
@@ -20,4 +20,42 @@
 	function templates($a = '') {
 
 		return assets($GLOBALS['template'] . $a);
+	}
+
+
+	function start_content($title = '') {
+
+		return '
+			
+			<!-- Main content -->
+    		<section class="content">
+
+		      <!-- Default box -->
+		      <div class="card">
+
+		        <div class="card-header">
+
+		          <h3 class="card-title">'.$title.'</h3>
+
+		          <div class="card-tools">
+
+		            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+		              <i class="fas fa-minus"></i></button>
+		            <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+		              <i class="fas fa-times"></i></button>
+		          </div>
+		        </div>
+
+		        <div class="card-body">';
+	}
+
+	function close_content() {
+
+		return '
+
+				</div><!-- /.card-body -->
+
+      		</div><!-- /.card -->
+
+    	</section>';
 	}
