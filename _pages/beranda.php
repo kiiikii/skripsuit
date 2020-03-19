@@ -1,6 +1,6 @@
 <?php 
 	
-	$title = "beranda";
+	$title = "Beranda";
 	$judul = $title;
 ?>
 
