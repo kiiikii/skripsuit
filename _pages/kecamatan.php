@@ -22,8 +22,35 @@
 			<?php 
 		} else {
 
-			echo 'ubah';
+			$data['kode'] = $_POST['kode'];
+			$data['nama'] = $_POST['nama'];
+			$db->where('idkec', $_POST['idkec']);
+			$db->update('kecamatan', $data);
+			?>
+			
+			<script>
+				
+				window.alert('data has been updated');
+				window.location.href = "<?= url('kecamatan') ?>";
+			</script>
+
+			<?php
 		}
+	}
+
+	if (isset($_GET['delete'])) {
+		
+		$db->where('idkec', $_GET['id']);
+		$db->delete('kecamatan');
+
+		?>
+		<script>
+				
+			window.alert('data has been deleted');
+			window.location.href = "<?= url('kecamatan') ?>";
+		</script>
+
+		<?php
 	}
 
 	if (isset($_GET['add']) OR isset($_GET['edit'])) {

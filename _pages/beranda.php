@@ -2,6 +2,7 @@
 	
 	$title = "Beranda";
 	$judul = $title;
+	
 ?>
 
 <?= start_content('Beranda') ?>

@@ -1,6 +1,8 @@
 <?php 
 
 	include '_loader.php';
+
+	$settemplate = true;
 	
 	if (isset($_GET['halaman'])) {
 		
@@ -22,9 +24,12 @@
 		include $file;
 	}
 
-	$halaman = ob_get_contents();
+	$content = ob_get_contents();
 
 	ob_end_clean();
+
+	if ($settemplate == true) {
+
 ?>
 
 <!DOCTYPE html>
@@ -70,7 +75,7 @@
 			      	</div><!-- /.container-fluid -->
 			    </section>
 
-			    <?php echo $halaman; ?><!-- /.content -->
+			    <?php echo $content; ?><!-- /.content -->
 				
 				
 	  		</div><!-- /.content-wrapper -->
@@ -82,3 +87,10 @@
 		</div>
 	</body>
 </html>
+
+<?php } else {
+
+	echo "$content";
+}
+
+?>
