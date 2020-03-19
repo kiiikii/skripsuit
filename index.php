@@ -43,42 +43,42 @@
 				include '_layouts/sidebar.php';
 			?>
 
-		<!-- Content Wrapper. Contains page content -->
-  		<div class="content-wrapper">
+			<!-- Content Wrapper. Contains page content -->
+	  		<div class="content-wrapper">
 
-		    <!-- Content Header (Page header) -->
-		    <section class="content-header">
+			    <!-- Content Header (Page header) -->
+			    <section class="content-header">
 
-		     	<div class="container-fluid">
+			     	<div class="container-fluid">
 
-		        	<div class="row mb-2">
+			        	<div class="row mb-2">
 
-		          		<div class="col-sm-6">
+			          		<div class="col-sm-6">
 
-		            		<h1><?= $judul ?></h1>
-		          		</div>
+			            		<h1><?= $judul ?></h1>
+			          		</div>
 
-		          		<div class="col-sm-6">
+			          		<div class="col-sm-6">
 
-		            		<ol class="breadcrumb float-sm-right">
+			            		<ol class="breadcrumb float-sm-right">
 
-		              			<li class="breadcrumb-item"><a href="#">Home</a></li>
-		              			<li class="breadcrumb-item active"><?= $judul ?></li>
-		            		</ol>
-		          		</div>
-		        	</div>
-		      	</div><!-- /.container-fluid -->
-		    </section>
+			              			<li class="breadcrumb-item"><a href="#">Home</a></li>
+			              			<li class="breadcrumb-item active"><?= $judul ?></li>
+			            		</ol>
+			          		</div>
+			        	</div>
+			      	</div><!-- /.container-fluid -->
+			    </section>
 
-		    <?php echo $halaman; ?><!-- /.content -->
+			    <?php echo $halaman; ?><!-- /.content -->
+				
+				
+	  		</div><!-- /.content-wrapper -->
+	  		<?php  
 
-  		</div><!-- /.content-wrapper -->
-
-  		<?php  
-
-  			include '_layouts/footer.php';
-  			include '_layouts/javascript.php';
-  		?>
+	  			include '_layouts/footer.php';
+	  			include '_layouts/javascript.php';
+	  		?>
 		</div>
 	</body>
 </html>

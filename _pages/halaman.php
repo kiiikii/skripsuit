@@ -4,7 +4,7 @@
 	$judul = $title;
 ?>
 
-<?= start_content('Beranda') ?>
+<?= start_content('Data Kecamatan') ?>
 
 			Selamat datang Admin !
 <?= close_content() ?>
