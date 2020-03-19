@@ -2,7 +2,7 @@
 
 	include '_loader.php';
 
-	$settemplate = true;
+	$setTemplate = true;
 	
 	if (isset($_GET['halaman'])) {
 		
@@ -28,8 +28,12 @@
 
 	ob_end_clean();
 
-	if ($settemplate == true) {
+	if ($setTemplate == true) {
 
+		if ($session->get("logged") !== true) {
+			
+			redirect(url('login'));
+		}
 ?>
 
 <!DOCTYPE html>

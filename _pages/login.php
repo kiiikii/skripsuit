@@ -1,6 +1,14 @@
 <?php 
 
-	$settemplate = false;
+	$setTemplate = false;
+	#if (isset($_POST['login'])) {
+	#	
+	#	$session::set('logged', true);
+	#	echo $session->get('logged');
+	#	redirect(url('beranda'));
+	#}
+	#
+	#echo $session->get('logged'). 'sss';
 ?>
 
 <!DOCTYPE html>

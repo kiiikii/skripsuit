@@ -4,4 +4,4 @@ $session = new Session();
 if($session::init()){
  $session::init();
 }   
-$session::setPrefix('_Webgis');
+$session::setPrefix('_skripsuit');

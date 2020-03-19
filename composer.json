@@ -1,5 +1,5 @@
 {
-    "name": "kiki/skripsi",
+    "name": "kiki/skripsuit",
     "license": "tidak ada",
     "authors": [
         {
@@ -8,8 +8,7 @@
         }
     ],
     "require": {
-        "joshcam/mysqli-database-class": "*",
-        "josantonius/session": "^1.1",
-        "verot/class.upload.php": "dev-master"
+        "joshcam/mysqli-database-class": "^2.9",
+        "josantonius/session": "^1.1"
     }
 }
