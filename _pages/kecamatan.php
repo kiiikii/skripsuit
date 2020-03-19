@@ -11,6 +11,15 @@
 			$data['kode'] = $_POST['kode'];
 			$data['nama'] = $_POST['nama'];
 			$db->insert('kecamatan', $data);
+			?>
+			
+			<script>
+				
+				window.alert('data has been added');
+				window.location.href = "<?= url('kecamatan') ?>";
+			</script>
+
+			<?php 
 		} else {
 
 			echo 'ubah';
