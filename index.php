@@ -31,7 +31,7 @@
     	
   		if ($ses->get("logged") !== true) {
   			
-  			redirect(url('beranda'));
+  			redirect(url('login'));
   		}
 ?>
 
