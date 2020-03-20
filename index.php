@@ -1,39 +1,38 @@
-<?php 
+<?php
 
 	include '_loader.php';
-
+	
 	$setTemplate = true;
 	
-	if (isset($_GET['halaman'])) {
-		
-		$halaman = $_GET['halaman'];
-	} else {
-
-		$halaman = 'beranda';
-	}
+	if(isset($_GET['halaman'])){
+    	
+    	$halaman=$_GET['halaman'];
+  	} else {
+    
+    	$halaman='beranda';
+  	}
 
 	ob_start();
 
-	$file = '_pages/' . $halaman . '.php';
-
-	if (!file_exists($file)) {
-		
-		include '_pages/error.php';
-	} else {
-
-		include $file;
-	}
-
-	$content = ob_get_contents();
-
-	ob_end_clean();
-
-	if ($setTemplate == true) {
-
-		if ($session->get("logged") !== true) {
-			
-			redirect(url('login'));
-		}
+	$file='_pages/'.$halaman.'.php';
+  
+  	if(!file_exists($file)){
+    	include '_pages/error.php';
+  	} else {
+    
+    	include $file;
+  	}
+  
+  	$content = ob_get_contents();
+  	
+  	ob_end_clean();
+  
+  	if($setTemplate == true){
+    	
+  		if ($ses->get("logged") !== true) {
+  			
+  			redirect(url('beranda'));
+  		}
 ?>
 
 <!DOCTYPE html>
@@ -94,7 +93,7 @@
 
 <?php } else {
 
-	echo "$content";
+	echo $content;
 }
 
 ?>

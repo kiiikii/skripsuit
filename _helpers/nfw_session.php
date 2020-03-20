@@ -1,7 +1,13 @@
 <?php
-use Josantonius\Session\Session;
-$session = new Session();
-if($session::init()){
- $session::init();
-}   
-$session::setPrefix('_skripsuit');
+
+
+	use Josantonius\Session\Session;
+
+	$ses = new Session();
+
+	if($ses::init()){
+		
+		$ses::init();
+	}   
+	
+	$ses::setPrefix('_skripsuit');

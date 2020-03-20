@@ -11,7 +11,7 @@
 	$template = 'templates/AdminLTE-master/';
 
 	# session
-	$setsession['prefix'] = 'skripsuit';
+	$setSession['prefix'] = 'skripsuit';
 
 	# URI
 	$seturi['base'] = 'http://localhost/skripsuit/';

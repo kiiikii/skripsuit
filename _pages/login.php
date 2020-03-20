@@ -1,14 +1,6 @@
 <?php 
-
+	
 	$setTemplate = false;
-	#if (isset($_POST['login'])) {
-	#	
-	#	$session::set('logged', true);
-	#	echo $session->get('logged');
-	#	redirect(url('beranda'));
-	#}
-	#
-	#echo $session->get('logged'). 'sss';
 ?>
 
 <!DOCTYPE html>
@@ -16,16 +8,9 @@
 
 	<head>
 
-		<meta charset="utf-8">
-
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-
 		<title>E-TPU Admin Login</title>
 
-		<!-- Tell the browser to be responsive to screen width -->
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-
-		<?= include '_layouts/head.php' ?>
+		<?php include '_layouts/head.php'; ?>
 
 		<!-- icheck bootstrap -->
 		<link rel="stylesheet" href="<?= templates() ?>plugins/icheck-bootstrap/icheck-bootstrap.min.css">
@@ -37,7 +22,7 @@
 
 		<div class="login-logo">
 
-	 		<a href="<?= templates() ?>index2.html"><b>E-TPU</b>Login</a>
+	 		<a href="../../index2.html"><b>E-TPU</b>Login</a>
 		</div>
 
 	  	<!-- /.login-logo -->
@@ -89,7 +74,7 @@
 	  	</div>
 	</div><!-- /.login-box -->
 
-	<?php include '_layouts/javascript.php' ?>
+	<?php include '_layouts/javascript.php'; ?>
 
 	</body>
 </html>
