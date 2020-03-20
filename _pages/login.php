@@ -22,7 +22,7 @@
 
 		<div class="login-logo">
 
-	 		<a href="../../index2.html"><b>E-TPU</b>Login</a>
+	 		<a href="#"><b>E-TPU</b>Login</a>
 		</div>
 
 	  	<!-- /.login-logo -->
@@ -33,7 +33,7 @@
 	    		<p class="login-box-msg">Sign in to start your session</p>
 				
 				<!-- This is Form Action to Login -->
-	    		<form action="../../index3.html" method="post">
+	    		<form method="post">
 
 	        		<div class="input-group mb-3">
 

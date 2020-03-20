@@ -22,6 +22,12 @@
 		return assets($GLOBALS['template'] . $a);
 	}
 
+	function redirect($a=''){
+  		
+  		header("location: ".$a);
+  		exit;
+  	}
+
 
 	function start_content($title = '') {
 
