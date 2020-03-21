@@ -1,6 +1,37 @@
 <?php 
 	
 	$setTemplate = false;
+
+	// checking if there's any process submiting on login
+	if (isset($_POST['login'])) {
+
+		$namauser = $_POST['namauser'];
+		$sandiuser = $_POST['sandiuser'];
+		$db->where("namauser", $namauser);
+		$db->where("sandiuser", $sandiuser);
+		$data = $db->ObjectBuilder()->getOne('admin');
+		if ($db->count>0) {
+					
+			$ses->set("sign-in", true);
+			$ses->set("namauser", $data->namauser);
+			$ses->set("idad", $data->idad);
+			$ses->set("info", '<div class="alert alert-success alert-dismissible" style="width:500px;">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  <i class="icon fas fa-check"></i>Welcome Home '.$data->namauser.'
+                </div>');
+			redirect(url("beranda"));
+
+		} else {
+
+			$ses->set("sign-in", false);
+			$ses->set("info", '<div class="alert alert-danger alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  <h4><i class="icon fas fa-ban"></i>Error !</h4>
+                 incorrect username and password
+                </div>');
+			redirect(url("login"));
+		}		
+	}
 ?>
 
 <!DOCTYPE html>
@@ -31,13 +62,16 @@
 	    	<div class="card-body login-card-body">
 
 	    		<p class="login-box-msg">Sign in to start your session</p>
+
+	    		<!-- storing session if username or password incorrect -->
+	    		<?= $ses->pull('info') ?>
 				
 				<!-- This is Form Action to Login -->
 	    		<form method="post">
 
 	        		<div class="input-group mb-3">
 
-	        			<input type="email" class="form-control" placeholder="Email">
+	        			<input type="text" class="form-control" name="namauser" placeholder="user">
 
 	        			<div class="input-group-append">
 	            
@@ -50,7 +84,7 @@
 
 	        		<div class="input-group mb-3">
 	          			
-	          			<input type="password" class="form-control" placeholder="Password">
+	          			<input type="password" class="form-control" name="sandiuser" placeholder="password">
 	          
 	          			<div class="input-group-append">
 	            			
@@ -66,7 +100,7 @@
 	          			<!-- /.col -->
 	        			<div class="col-12">
 	        				
-	        				<button type="submit" class="btn btn-primary btn-block">Sign In</button>
+	        				<button type="submit" name="login" class="btn btn-primary btn-block">Sign In</button>
 	        			</div><!-- /.col -->
 	        		</div>
 	      		</form>

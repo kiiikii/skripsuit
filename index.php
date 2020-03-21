@@ -29,7 +29,7 @@
   
   	if($setTemplate == true){
     	
-  		if ($ses->get("logged") !== true) {
+  		if ($ses->get("sign-in") !== true) {
   			
   			redirect(url('login'));
   		}
