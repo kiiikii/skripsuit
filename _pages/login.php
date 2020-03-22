@@ -71,7 +71,7 @@
 
 	        		<div class="input-group mb-3">
 
-	        			<input type="text" class="form-control" name="namauser" placeholder="user">
+	        			<input type="text" class="form-control" name="namauser" placeholder="username">
 
 	        			<div class="input-group-append">
 	            
