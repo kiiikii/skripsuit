@@ -5,12 +5,19 @@
 	$url = "kecamatan";
 
 	if (isset($_POST['save'])) {
+
+		$file = upload('gjkec', 'gjson');
+
+		if ($file != false) {
+			
+			$data['gjkec'] = $file;
+		}
 		
 		if ($_POST['idkec'] == '') {
 			
 			$data['kode'] = $_POST['kode'];
 			$data['nama'] = $_POST['nama'];
-			$db->insert('kecamatan', $data);
+			$db->insert("kecamatan", $data);
 			?>
 			
 			<script>
@@ -25,7 +32,7 @@
 			$data['kode'] = $_POST['kode'];
 			$data['nama'] = $_POST['nama'];
 			$db->where('idkec', $_POST['idkec']);
-			$db->update('kecamatan', $data);
+			$db->update("kecamatan", $data);
 			?>
 			
 			<script>
@@ -58,6 +65,7 @@
 		$idkec = "";
 		$kode = "";
 		$nama = "";
+		$gjkec = "";
 
 		if (isset($_GET['edit']) AND isset($_GET['id'])) {
 			
@@ -69,6 +77,7 @@
 				$idkec = $row->idkec;
 				$kode = $row->kode;
 				$nama = $row->nama;
+				$gjkec = $row->gjkec;
 			}
 		}
 ?>
@@ -76,7 +85,7 @@
 	<!-- for inserting a data -->
 		<?= start_content('Form Kecamatan') ?>
 
-			<form method="post">
+			<form method="post" enctype="multipart/form-data">
 
 				<?= input_hidden('idkec', $idkec) ?>
 				<div class="form-group">
@@ -93,6 +102,12 @@
 
 				<div class="form-group">
 					
+					<label>GeoJSON</label>
+					<?= input_file('gjkec', $gjkec) ?>
+				</div>
+
+				<div class="form-group">
+					
 					<button type="submit" name="save" class="btn btn-info"><i class="fa fa-save"></i> Save</button>
 					<a href="<?= url($url) ?>" class="btn btn-danger"><i class="fa fa-reply"></i> Back</a>
 
@@ -105,7 +120,7 @@
 	<!-- for reading a data  -->
 		<?= start_content('Data Kecamatan') ?>
 			
-			<a href="<?= url($url . '&add') ?>" class="btn btn-success" style="width: 150px;"><i class="fa fa-plus"></i> Add Data</a>
+			<a href="<?= url($url . '&add') ?>" class="btn btn-success" style="width: 150px;"><i class="fa fa-plus"></i></a>
 
 			<hr>
 			<table class="table table-hover">
@@ -117,6 +132,7 @@
 						<th>No</th>
 						<th>Kode</th>
 						<th>Nama Kecamatan</th>
+						<th>GeoJSON</th>
 						<th>Action</th>
 					</tr>
 				</thead>
@@ -135,6 +151,7 @@
 									<td><?= $no; ?></td>
 									<td><?= $row->kode; ?></td>
 									<td><?= $row->nama; ?></td>
+									<td><?= $row->gjkec; ?></td>
 									<td>
 										
 										<a href="<?= url($url. '&edit&id=' .$row->idkec)?>" class="btn btn-info"><i class="fa fa-edit"></i></a>

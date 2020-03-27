@@ -46,8 +46,8 @@
 			<li class="nav-item dropdown">
 
 				<a class="nav-link" data-toggle="dropdown" href="#" data-slide="true" href="#" role="button">
-					
-					<i class="fas fa-th-large"></i>
+					<span><?= $ses->get('namauser') ?></span>
+					<!-- <i class="fas fa-user fa-fw"></i> -->
 				</a>
 			
 				<!-- Dropdown - User Information -->

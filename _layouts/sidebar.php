@@ -11,7 +11,7 @@
 		<!-- Sidebar -->
     	<div class="sidebar">
 
-			<!-- Sidebar user (optional) -->
+			<!-- Sidebar user (optional) 
       		<div class="user-panel mt-3 mb-3 d-flex">
 
       			<div class="image">
@@ -23,7 +23,7 @@
 
       				<p style="color: white;" class="d-block"><?= $ses->get('namauser') ?></p>
       			</div>
-      		</div>
+      		</div> -->
     	
 	    	<!-- Sidebar Menu -->
 	    	<nav class="mt-2">
@@ -44,9 +44,9 @@
 
 	    				<a href="#" class="nav-link">
 
-	    					<i class="nav-icon fas fa-chart-pie"></i>
+	    					<i class="nav-icon fas fa-folder"></i>
 
-	              			<p>Charts</p>
+	              			<p>Data</p>
 	    				</a>
 
 	    				<ul class="nav nav-treeview">
@@ -57,6 +57,36 @@
 
 	    							<i class="nav-icon fas fa-map-marker"></i>
 	    							<p>Kecamatan</p>
+	    						</a>
+	    					</li>
+
+	    					<li class="nav-item">
+
+	    						<a href="<?= url('kuburan') ?>" class="nav-link">
+
+	    							<i class="nav-icon fas fa-map-marker"></i>
+	    							<p>Kuburan</p>
+	    						</a>
+	    					</li>
+	    				</ul>
+	    			</li>
+
+	    			<li class="nav-item has-treeview">
+
+						<a href="#" class="nav-link">
+	    					
+	    					<i class="nav-icon fas fa-map"></i>
+	    					<p>Leaflet</p>
+	    				</a>
+
+	    				<ul class="nav nav-treeview">
+
+	    					<li class="nav-item">
+
+	    						<a href="<?= url('standard') ?>" class="nav-link">
+
+	    							<i class="nav-icon fas fa-map-marker"></i>
+	    							<p>Standard Map</p>
 	    						</a>
 	    					</li>
 	    				</ul>
