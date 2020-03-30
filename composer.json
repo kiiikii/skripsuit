@@ -3,7 +3,7 @@
     "require": {
         "joshcam/mysqli-database-class": "*",
         "josantonius/session": "^1.1",
-        "verot/class.upload.php": "dev-master"
+        "verot/class.upload.php": "*"
     },
     "license": "tidak ada",
     "authors": [

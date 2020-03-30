@@ -151,7 +151,7 @@
 									<td><?= $no; ?></td>
 									<td><?= $row->kode; ?></td>
 									<td><?= $row->nama; ?></td>
-									<td><?= $row->gjkec; ?></td>
+									<td><a href="<?=assets('unggah/gjson/'.$row->gjkec)?>" target="_BLANK"><?= $row->gjkec; ?></a></td>
 									<td>
 										
 										<a href="<?= url($url. '&edit&id=' .$row->idkec)?>" class="btn btn-info"><i class="fa fa-edit"></i></a>
