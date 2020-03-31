@@ -7,6 +7,7 @@
 	if(isset($_GET['halaman'])){
     	
     	$halaman=$_GET['halaman'];
+
   	} else {
     
     	$halaman='beranda';
@@ -18,6 +19,7 @@
   
   	if(!file_exists($file)){
     	include '_pages/error.php';
+    	
   	} else {
     
     	include $file;

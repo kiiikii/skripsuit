@@ -108,8 +108,8 @@
 
 				<div class="form-group">
 					
-					<button type="submit" name="save" class="btn btn-info"><i class="fa fa-save"></i> Save</button>
-					<a href="<?= url($url) ?>" class="btn btn-danger"><i class="fa fa-reply"></i> Back</a>
+					<button type="submit" name="save" class="btn btn-info"><i class="fa fa-save"></i></button>
+					<a href="<?= url($url) ?>" class="btn btn-danger"><i class="fa fa-reply"></i></a>
 
 				</div>
 			</form>
