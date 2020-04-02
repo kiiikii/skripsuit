@@ -98,4 +98,9 @@
 	echo $content;
 }
 
+if (isset($jsfile)) {
+
+	include '_pages/js/' .$jsfile. '.php';
+}
+
 ?>

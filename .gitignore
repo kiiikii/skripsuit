@@ -1,6 +1,4 @@
 /vendor
-/.idea
-/.vagrant
 env.php
 composer.lock
-composer.phar
+another-menu.php

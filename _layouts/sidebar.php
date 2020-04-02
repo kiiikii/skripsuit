@@ -46,7 +46,7 @@
 
 	    					<i class="nav-icon fas fa-folder"></i>
 
-	              			<p>Data</p>
+	              			<p>Form Data</p>
 	    				</a>
 
 	    				<ul class="nav nav-treeview">

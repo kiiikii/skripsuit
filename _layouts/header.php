@@ -4,11 +4,11 @@
 		<!-- left navbar link -->
 		<ul class="navbar-nav">
 			
-			<li class="navbar-nav">
+			<li class="navbar-item">
 				
 				<a class="nav-link" data-widget="pushmenu" href="#" role="button">
 					
-					<i class="fas fa-bar"></i>
+					<i class="fas fa-bars"></i>
 				</a>
 			</li>
 

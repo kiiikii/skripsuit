@@ -2,11 +2,11 @@
 	
 	$title = "Beranda";
 	$judul = $title;
-	
+	$jsfile = 'leaflet';
 ?>
 
 <?= start_content('Beranda') ?>
 			
 			<?= $ses->pull("info") ?>
-			Selamat datang Admin !
+			<div id="mapid"></div>
 <?= close_content() ?>
