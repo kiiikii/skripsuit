@@ -116,13 +116,13 @@
 				<div class="form-group">
 					
 					<label>Kode</label>
-					<?= input_text('kode', $kode) ?>
+					<?= input_text('kode', $kode, '', 'required') ?>
 				</div>
 
 				<div class="form-group">
 					
 					<label>Nama Kecamatan</label>
-					<?= input_text('nama', $nama) ?>
+					<?= input_text('nama', $nama, '', 'required') ?>
 				</div>
 
 				<div class="form-group">

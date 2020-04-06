@@ -1,477 +1,300 @@
-<?php
+<?php 
 	
 	$title = "Kuburan";
 	$judul = $title;
 	$url = "kuburan";
+
+	if (isset($_POST['save'])) {
+
+		//$file = upload('gjkec', 'gjson');
+		//
+		//if ($file != false) {
+		//	
+		//	$data['gjkec'] = $file;
+		//}
+
+		$data['idkec'] = $_POST['idkec'];
+		$data['namakub'] = $_POST['namakub'];
+		$data['alamat'] = $_POST['alamat'];
+		$data['lat'] = $_POST['lat'];
+		$data['lng'] = $_POST['lng'];
+		$data['deskripsi'] = $_POST['deskripsi'];
+
+		if ($_POST['idkub'] == '') {
+			
+			$exec = $db->insert("kuburan", $data);
+			$info = '<div class="alert alert-success alert-dismissible" style="width:500px;">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  <i class="icon fas fa-check"></i>data has been added
+                </div>';
+
+		} else {
+
+			//$data['kode'] = $_POST['kode'];
+			//$data['nama'] = $_POST['nama'];
+			$db->where('idkub', $_POST['idkub']);
+			$exec = $db->update("kuburan", $data);
+			$info = '<div class="alert alert-success alert-dismissible" style="width:500px;">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  <i class="icon fas fa-check"></i>data has been updated
+                </div>';
+		}
+
+		if ($exec) {
+			
+			$ses->set('info', $info);
+
+		} else {
+
+			$ses->set("info", '<div class="alert alert-danger alert-dismissible" style="width:500px;">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  <i class="icon fas fa-check"></i>failed to process
+                </div>');
+		}
+
+		redirect(url($url));
+	}
+
+	if (isset($_GET['delete'])) {
+
+		$setTemplate = false;
+
+		// delete file inside the folder
+		//$db->where('idkec', $_GET['id']);
+		//$get = $db->ObjectBuilder()->getOne('kecamatan');
+		//$gjkec = $get->gjkec;
+		//unlink('assets/unggah/gjson/'.$gjkec);
+		// end of deleted file inside thr folder
+		
+		$db->where('idkub', $_GET['id']);
+		$exec = $db->delete('kuburan');
+		$info = '<div class="alert alert-success alert-dismissible" style="width:500px;">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  <i class="icon fas fa-check"></i>data has been deleted
+                </div>';
+
+        if ($exec) {
+			
+			$ses->set('info', $info);
+
+		} else {
+
+			$ses->set("info", '<div class="alert alert-danger alert-dismissible" style="width:500px;">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  <i class="icon fas fa-check"></i>failed to process
+                </div>');
+		}
+
+		redirect(url($url));
+	}
+
+	if (isset($_GET['add']) OR isset($_GET['edit'])) {
+	
+		$idkub = "";
+		$idkec = "";
+		$namakub = "";
+		$alamat = "";
+		$lat = "";
+		$lng = "";
+		$deskripsi = "";
+		$marker = "";
+
+		if (isset($_GET['edit']) AND isset($_GET['id'])) {
+			
+			$id = $_GET['id'];
+			$db->where('idkub', $id);
+			$row = $db->ObjectBuilder()->getOne('kuburan');
+			if ($db->count>0) {
+				
+				$idkub = $row->idkub;
+				$idkec = $row->idkec;
+				$namakub = $row->namakub;
+				$alamat = $row->alamat;
+				$lat = $row->lat;
+				$lng = $row->lng;
+				$deskripsi = $row->deskripsi;
+				$marker = $row->marker;
+			}
+		}
 ?>
 
 	<!-- for inserting a data -->
 		<?= start_content('Form Kuburan') ?>
 
-			<form method="post">
+			<form method="post" enctype="multipart/form-data">
+
+				<?= input_hidden('idkub', $idkub) ?>
+
+				<div class="form-group">
+
+					<label>Nama Kecamatan</label>
+
+					<div class="row">
+
+						<div class="col-md-2">
+
+							<?php 
+
+								$op[''] = "select kecamatan";
+								foreach($db->ObjectBuilder()->get('kecamatan') as $row) {
+
+									$op[$row->idkec] = $row->nama;
+								}
+							?>
+
+							<?= select('idkec', $op, $idkec) ?>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+
+					<label>Nama Kuburan</label>	
+
+					<div class="row">
+
+						<div class="col-md-3">
+
+						<?= input_text('namakub', $namakub, '', 'required') ?>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+
+					<label>Alamat</label>
+					
+					<div class="row">
+
+						<div class="col-md-5">
+							
+							<?= input_text('alamat', $alamat, '', 'required') ?>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+
+					<label>Latitude dan Longitude</label>
+					
+					<div class="row">
+
+						<div class="col-md-2">
+
+							<?= input_text('lat', $lat, '', 'required') ?>
+						</div>
+							
+						<div class="col-md-2">
+
+							<?= input_text('lng', $lng, '', 'required') ?>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					
+					<div class="row">
+
+						<div class="col-md-5">
+
+							<label>Deskripsi</label>
+							<div class="mb-3">
+
+								<?= textarea('deskripsi', $deskripsi, 'textarea', 'style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"', 'required') ?>
+							</div>
+
+							<p class="text-sm mb-0">
+
+								Editor <a href="https://github.com/bootstrap-wysiwyg/bootstrap3-wysiwyg">Documentation and license information.</a>
+							</p>
+						</div>
+					</div>
+				</div>
 				
 				<div class="form-group">
 					
-					<label>Nama Kuburan</label>
-				</div>
+					<div class="row">
 
-				<div class="form-group">
-					
-					<label>Alamat</label>
-				</div>
+						<div class="col-md-3">
 
-				<div class="form-group">
-					
-					<label>GeoJSON</label>
-				</div>
-
-				<div class="form-group">
-					
-					<label>Deskripsi</label>
+							<label>Marker</label>
+							<?= input_file('marker', $marker) ?>
+						</div>
+					</div>	
 				</div>
 
 				<div class="form-group">
 					
 					<button type="submit" name="save" class="btn btn-info"><i class="fa fa-save"></i></button>
-					<a href="<?= url($url) ?>" class="btn btn-danger"><i class="fa fa-reply"></i></a>
+					<span class="col-md-12">
+						
+						<a href="<?= url($url) ?>" class="btn btn-danger"><i class="fa fa-reply"></i></a>
+					</span>
 				</div>
 			</form>
-		<? close_content() ?>
-
-
-	<!-- for reading a data -->
-		<?= start_content('Data Kuburan') ?>
-
-			<a href="<?= url($url . '&add') ?>" class="btn btn-success" style="width: 150px;"><i class="fa fa-plus"></i></a>
-			
-			<hr>
-			<table id="kuburan" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Rendering engine</th>
-                  <th>Browser</th>
-                  <th>Platform(s)</th>
-                  <th>Engine version</th>
-                  <th>CSS grade</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                  <td>Trident</td>
-                  <td>Internet
-                    Explorer 4.0
-                  </td>
-                  <td>Win 95+</td>
-                  <td> 4</td>
-                  <td>X</td>
-                </tr>
-                <tr>
-                  <td>Trident</td>
-                  <td>Internet
-                    Explorer 5.0
-                  </td>
-                  <td>Win 95+</td>
-                  <td>5</td>
-                  <td>C</td>
-                </tr>
-                <tr>
-                  <td>Trident</td>
-                  <td>Internet
-                    Explorer 5.5
-                  </td>
-                  <td>Win 95+</td>
-                  <td>5.5</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Trident</td>
-                  <td>Internet
-                    Explorer 6
-                  </td>
-                  <td>Win 98+</td>
-                  <td>6</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Trident</td>
-                  <td>Internet Explorer 7</td>
-                  <td>Win XP SP2+</td>
-                  <td>7</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Trident</td>
-                  <td>AOL browser (AOL desktop)</td>
-                  <td>Win XP</td>
-                  <td>6</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Firefox 1.0</td>
-                  <td>Win 98+ / OSX.2+</td>
-                  <td>1.7</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Firefox 1.5</td>
-                  <td>Win 98+ / OSX.2+</td>
-                  <td>1.8</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Firefox 2.0</td>
-                  <td>Win 98+ / OSX.2+</td>
-                  <td>1.8</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Firefox 3.0</td>
-                  <td>Win 2k+ / OSX.3+</td>
-                  <td>1.9</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Camino 1.0</td>
-                  <td>OSX.2+</td>
-                  <td>1.8</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Camino 1.5</td>
-                  <td>OSX.3+</td>
-                  <td>1.8</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Netscape 7.2</td>
-                  <td>Win 95+ / Mac OS 8.6-9.2</td>
-                  <td>1.7</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Netscape Browser 8</td>
-                  <td>Win 98SE+</td>
-                  <td>1.7</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Netscape Navigator 9</td>
-                  <td>Win 98+ / OSX.2+</td>
-                  <td>1.8</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Mozilla 1.0</td>
-                  <td>Win 95+ / OSX.1+</td>
-                  <td>1</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Mozilla 1.1</td>
-                  <td>Win 95+ / OSX.1+</td>
-                  <td>1.1</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Mozilla 1.2</td>
-                  <td>Win 95+ / OSX.1+</td>
-                  <td>1.2</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Mozilla 1.3</td>
-                  <td>Win 95+ / OSX.1+</td>
-                  <td>1.3</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Mozilla 1.4</td>
-                  <td>Win 95+ / OSX.1+</td>
-                  <td>1.4</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Mozilla 1.5</td>
-                  <td>Win 95+ / OSX.1+</td>
-                  <td>1.5</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Mozilla 1.6</td>
-                  <td>Win 95+ / OSX.1+</td>
-                  <td>1.6</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Mozilla 1.7</td>
-                  <td>Win 98+ / OSX.1+</td>
-                  <td>1.7</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Mozilla 1.8</td>
-                  <td>Win 98+ / OSX.1+</td>
-                  <td>1.8</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Seamonkey 1.1</td>
-                  <td>Win 98+ / OSX.2+</td>
-                  <td>1.8</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Epiphany 2.20</td>
-                  <td>Gnome</td>
-                  <td>1.8</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Webkit</td>
-                  <td>Safari 1.2</td>
-                  <td>OSX.3</td>
-                  <td>125.5</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Webkit</td>
-                  <td>Safari 1.3</td>
-                  <td>OSX.3</td>
-                  <td>312.8</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Webkit</td>
-                  <td>Safari 2.0</td>
-                  <td>OSX.4+</td>
-                  <td>419.3</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Webkit</td>
-                  <td>Safari 3.0</td>
-                  <td>OSX.4+</td>
-                  <td>522.1</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Webkit</td>
-                  <td>OmniWeb 5.5</td>
-                  <td>OSX.4+</td>
-                  <td>420</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Webkit</td>
-                  <td>iPod Touch / iPhone</td>
-                  <td>iPod</td>
-                  <td>420.1</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Webkit</td>
-                  <td>S60</td>
-                  <td>S60</td>
-                  <td>413</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Presto</td>
-                  <td>Opera 7.0</td>
-                  <td>Win 95+ / OSX.1+</td>
-                  <td>-</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Presto</td>
-                  <td>Opera 7.5</td>
-                  <td>Win 95+ / OSX.2+</td>
-                  <td>-</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Presto</td>
-                  <td>Opera 8.0</td>
-                  <td>Win 95+ / OSX.2+</td>
-                  <td>-</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Presto</td>
-                  <td>Opera 8.5</td>
-                  <td>Win 95+ / OSX.2+</td>
-                  <td>-</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Presto</td>
-                  <td>Opera 9.0</td>
-                  <td>Win 95+ / OSX.3+</td>
-                  <td>-</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Presto</td>
-                  <td>Opera 9.2</td>
-                  <td>Win 88+ / OSX.3+</td>
-                  <td>-</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Presto</td>
-                  <td>Opera 9.5</td>
-                  <td>Win 88+ / OSX.3+</td>
-                  <td>-</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Presto</td>
-                  <td>Opera for Wii</td>
-                  <td>Wii</td>
-                  <td>-</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Presto</td>
-                  <td>Nokia N800</td>
-                  <td>N800</td>
-                  <td>-</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Presto</td>
-                  <td>Nintendo DS browser</td>
-                  <td>Nintendo DS</td>
-                  <td>8.5</td>
-                  <td>C/A<sup>1</sup></td>
-                </tr>
-                <tr>
-                  <td>KHTML</td>
-                  <td>Konqureror 3.1</td>
-                  <td>KDE 3.1</td>
-                  <td>3.1</td>
-                  <td>C</td>
-                </tr>
-                <tr>
-                  <td>KHTML</td>
-                  <td>Konqureror 3.3</td>
-                  <td>KDE 3.3</td>
-                  <td>3.3</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>KHTML</td>
-                  <td>Konqureror 3.5</td>
-                  <td>KDE 3.5</td>
-                  <td>3.5</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Tasman</td>
-                  <td>Internet Explorer 4.5</td>
-                  <td>Mac OS 8-9</td>
-                  <td>-</td>
-                  <td>X</td>
-                </tr>
-                <tr>
-                  <td>Tasman</td>
-                  <td>Internet Explorer 5.1</td>
-                  <td>Mac OS 7.6-9</td>
-                  <td>1</td>
-                  <td>C</td>
-                </tr>
-                <tr>
-                  <td>Tasman</td>
-                  <td>Internet Explorer 5.2</td>
-                  <td>Mac OS 8-X</td>
-                  <td>1</td>
-                  <td>C</td>
-                </tr>
-                <tr>
-                  <td>Misc</td>
-                  <td>NetFront 3.1</td>
-                  <td>Embedded devices</td>
-                  <td>-</td>
-                  <td>C</td>
-                </tr>
-                <tr>
-                  <td>Misc</td>
-                  <td>NetFront 3.4</td>
-                  <td>Embedded devices</td>
-                  <td>-</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Misc</td>
-                  <td>Dillo 0.8</td>
-                  <td>Embedded devices</td>
-                  <td>-</td>
-                  <td>X</td>
-                </tr>
-                <tr>
-                  <td>Misc</td>
-                  <td>Links</td>
-                  <td>Text only</td>
-                  <td>-</td>
-                  <td>X</td>
-                </tr>
-                <tr>
-                  <td>Misc</td>
-                  <td>Lynx</td>
-                  <td>Text only</td>
-                  <td>-</td>
-                  <td>X</td>
-                </tr>
-                <tr>
-                  <td>Misc</td>
-                  <td>IE Mobile</td>
-                  <td>Windows Mobile 6</td>
-                  <td>-</td>
-                  <td>C</td>
-                </tr>
-                <tr>
-                  <td>Misc</td>
-                  <td>PSP browser</td>
-                  <td>PSP</td>
-                  <td>-</td>
-                  <td>C</td>
-                </tr>
-                <tr>
-                  <td>Other browsers</td>
-                  <td>All others</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>U</td>
-                </tr>
-                </tbody>
-                <tfoot>
-                <tr>
-                  <th>Rendering engine</th>
-                  <th>Browser</th>
-                  <th>Platform(s)</th>
-                  <th>Engine version</th>
-                  <th>CSS grade</th>
-                </tr>
-                </tfoot>
-              </table>
 		<?= close_content() ?>
+
+	<?php } else { ?>
+
+	<!-- for reading a data  -->
+		<?= start_content('Data Kuburan') ?>
+			
+			<a href="<?= url($url . '&add') ?>" class="btn btn-success" style="width: 150px;"><i class="fa fa-plus"></i></a>
+
+			<hr>
+
+			<?= $ses->pull("info") ?>
+
+			<table id="kuburan" class="table table-bordered table-striped">
+						
+				<thead>
+							
+					<tr>
+								
+						<th>No</th>
+						<th>Nama Kecamatan</th>
+						<th>Nama Kuburan</th>
+						<th>Alamat</th>
+						<th>Latitude</th>
+						<th>Longitude</th>
+						<th>Deskripsi</th>
+						<th>Marker</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+
+				<tbody>
+							
+					<?php 
+
+						$no = 1;
+						$db->join('kecamatan b', 'a.idkec = b.idkec', 'LEFT');
+						$getdata = $db->ObjectBuilder()->get('kuburan a');
+						foreach ($getdata as $row) {
+										
+							?>
+								<tr>
+											
+									<td><?= $no; ?></td>
+									<td><?= $row->nama; ?></td>
+									<td><?= $row->namakub; ?></td>
+									<td><?= $row->alamat; ?></td>
+									<td><?= $row->lat; ?></td>
+									<td><?= $row->lng; ?></td>
+									<td><?= $row->deskripsi; ?></td>
+									<td><?= $row->marker; ?></td>
+									<td>
+										
+										<a href="<?= url($url. '&edit&id=' .$row->idkec)?>" class="btn btn-info"><i class="fa fa-edit"></i></a>
+										<a href="<?= url($url. '&delete&id=' .$row->idkec)?>" class="btn btn-danger" onclick="return confirm('Delete Data ?')"><i class="fa fa-trash"></i></a>
+									</td>
+								</tr>
+							<?php
+
+							$no++;
+						}
+					?>
+				</tbody>
+			</table>
+		<?= close_content() ?>
+	<?php } ?>

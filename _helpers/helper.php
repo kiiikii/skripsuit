@@ -38,11 +38,12 @@
 
 		      <!-- Default box -->
 		      <div class="card">
-
+				
 		        <div class="card-header">
 
 		          <h3 class="card-title">'.$title.'</h3>
-
+				  
+				  <!-- tools box -->
 		          <div class="card-tools">
 
 		            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -50,9 +51,10 @@
 		            <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
 		              <i class="fas fa-times"></i></button>
 		          </div>
+		          <!-- /. tools -->
 		        </div>
 
-		        <div class="card-body">';
+		        <div class="card-body pad">';
 	}
 
 	function close_content() {

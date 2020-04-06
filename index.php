@@ -80,10 +80,12 @@
 			      	</div><!-- /.container-fluid -->
 			    </section>
 
-			    <?php echo $content; ?><!-- /.content -->
+			    <?php echo $content; ?>
+			    <!-- /.content -->
 				
 				
-	  		</div><!-- /.content-wrapper -->
+	  		</div>
+	  		<!-- /.content-wrapper -->
 	  		<?php  
 
 	  			include '_layouts/footer.php';

@@ -22,6 +22,9 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<?= templates() ?>dist/js/demo.js"></script>
 
+<!-- Summernote -->
+<script src="<?= templates() ?>plugins/summernote/summernote-bs4.min.js"></script>
+
 <!-- page script -->
 <script type="text/javascript">
 	
@@ -31,5 +34,8 @@
 	      "responsive": true,
 	      "autoWidth": false,
 	    });
+
+	    // Summernote
+    	$('.textarea').summernote();
 	});
 </script>
