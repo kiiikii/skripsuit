@@ -285,8 +285,8 @@
 									<td><?= $row->marker; ?></td>
 									<td>
 										
-										<a href="<?= url($url. '&edit&id=' .$row->idkec)?>" class="btn btn-info"><i class="fa fa-edit"></i></a>
-										<a href="<?= url($url. '&delete&id=' .$row->idkec)?>" class="btn btn-danger" onclick="return confirm('Delete Data ?')"><i class="fa fa-trash"></i></a>
+										<a href="<?= url($url. '&edit&id=' .$row->idkub)?>" class="btn btn-info"><i class="fa fa-edit"></i></a>
+										<a href="<?= url($url. '&delete&id=' .$row->idkub)?>" class="btn btn-danger" onclick="return confirm('Delete Data ?')"><i class="fa fa-trash"></i></a>
 									</td>
 								</tr>
 							<?php
