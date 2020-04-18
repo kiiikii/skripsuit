@@ -2,7 +2,7 @@
 	<aside class="main-sidebar sidebar-dark-primary elevation-4">
 		
 		<!-- Brand Logo -->
-		<a href="<?= templates() ?>index3.html" class="brand-link">
+		<a class="brand-link nav-link disabled" href="#">
 
 			<img src="<?= templates() ?>dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
 			<span class="brand-text font-weight-light">E-TPU Admin</span>
@@ -55,7 +55,7 @@
 
 	    						<a href="<?= url('kecamatan') ?>" class="nav-link">
 
-	    							<i class="nav-icon fas fa-map-marker"></i>
+	    							<i class="nav-icon fas fa-building"></i>
 	    							<p>Kecamatan</p>
 	    						</a>
 	    					</li>
@@ -67,28 +67,25 @@
 	    							<i class="nav-icon fas fa-map-marker"></i>
 	    							<p>Kuburan</p>
 	    						</a>
-	    					</li>
-	    				</ul>
-	    			</li>
+							</li>
+							
+							<li class="nav-item">
 
-	    			<li class="nav-item has-treeview">
-
-						<a href="#" class="nav-link">
+								<a href="#" class="nav-link">
 	    					
-	    					<i class="nav-icon fas fa-map"></i>
-	    					<p>Leaflet</p>
-	    				</a>
-
-	    				<ul class="nav nav-treeview">
-
-	    					<li class="nav-item">
-
-	    						<a href="<?= url('standard') ?>" class="nav-link">
-
-	    							<i class="nav-icon fas fa-map-marker"></i>
-	    							<p>Standard Map</p>
+									<i class="nav-icon fas fa-user"></i>
+	    							<p>Almarhum / almarhumah</p>
 	    						</a>
-	    					</li>
+							</li>
+
+							<li class="nav-item">
+
+								<a href="#" class="nav-link">
+	    					
+									<i class="nav-icon fas fa-tree"></i>
+	    							<p>Tanah</p>
+	    						</a>
+							</li>
 	    				</ul>
 	    			</li>
 
@@ -106,3 +103,4 @@
     	</div>
     	<!-- /.sidebar -->
 	</aside>
+

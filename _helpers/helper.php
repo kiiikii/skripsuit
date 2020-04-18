@@ -32,7 +32,6 @@
 	function start_content($title = '') {
 
 		return '
-			
 			<!-- Main content -->
     		<section class="content">
 
@@ -66,4 +65,32 @@
       		</div><!-- /.card -->
 
     	</section>';
+	}
+
+	function profile_open() {
+
+		return '
+		<!-- Main content -->
+		<section class="content">
+			
+			<div class="container-fluid">
+					
+				<div class="row">
+				
+					<div class="col-md-3">
+		';
+	}
+
+	function profile_close() {
+
+		return '
+		
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+		<!-- /.content -->';
 	}
