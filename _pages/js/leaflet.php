@@ -111,23 +111,6 @@
 			}
 		?>
 
-		//<?php
-		//
-		//	$getkub = $db->ObjectBuilder()->get('kuburan');
-		//	foreach ($getkub as $row) {
-		//	?>
-		//
-		//	var 
-		//	
-		//	<?php
-		//
-		//		$arrayKub[] = '{
-		//
-		//
-		//		}';
-		//	}
-		//?>
-
 		var overLayers = [{
 		
 			group: "Kecamatan",
@@ -145,6 +128,14 @@
 		map.addControl(panelLayers);
 
 		// marker
+		var myIcon = L.Icon.extend({
+
+			option:{
+
+				iconSize: [38, 45]	
+			}
+		});
+
 		<?php
 
 			$db->join('kecamatan b', 'a.idkec = b.idkec', 'LEFT');
@@ -153,7 +144,8 @@
 
 				?>
 				
-				L.marker([<?= $row->lat ?>, <?= $row->lng ?>]).addTo(map);
+				L.marker([<?= $row->lat ?>, <?= $row->lng ?>], {icon: new myIcon({iconUrl: '<?= ($row->marker == '')?assets('icons/marker.png'):assets('unggah/marker/'.$row->marker) ?>'})}).addTo(map)
+					.bindPopup("Nama : <?= $row->namakub ?><br>Kec. <?= $row->nama?><br>Alamat : <?= $row->alamat ?>");
 
 				<?php
 			}

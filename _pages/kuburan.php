@@ -6,12 +6,22 @@
 
 	if (isset($_POST['save'])) {
 
-		//$file = upload('gjkec', 'gjson');
-		//
-		//if ($file != false) {
-		//	
-		//	$data['gjkec'] = $file;
-		//}
+		$file = upload('marker', 'marker');
+		
+		if ($file != false) {
+			
+			$data['marker'] = $file;
+
+			if($_POST['idkub']!='') {
+
+				// delete file inside a folder
+				$db->where('idkub', $_GET['id']);
+				$get = $db->ObjectBuilder()->getOne('kuburan');
+				$marker = $get->marker;
+				unlink('assets/unggah/marker/'.$marker);
+				// end of delete file inside a folder
+			}
+		}
 
 		$data['idkec'] = $_POST['idkec'];
 		$data['namakub'] = $_POST['namakub'];
@@ -20,7 +30,7 @@
 		$data['lng'] = $_POST['lng'];
 		$data['deskripsi'] = $_POST['deskripsi'];
 
-		if ($_POST['idkub'] == '') {
+		if ($_POST['idkub'] == "") {
 			
 			$exec = $db->insert("kuburan", $data);
 			$info = '<div class="alert alert-success alert-dismissible" style="width:500px;">
@@ -30,8 +40,6 @@
 
 		} else {
 
-			//$data['kode'] = $_POST['kode'];
-			//$data['nama'] = $_POST['nama'];
 			$db->where('idkub', $_POST['idkub']);
 			$exec = $db->update("kuburan", $data);
 			$info = '<div class="alert alert-success alert-dismissible" style="width:500px;">
@@ -60,14 +68,14 @@
 		$setTemplate = false;
 
 		// delete file inside the folder
-		//$db->where('idkec', $_GET['id']);
-		//$get = $db->ObjectBuilder()->getOne('kecamatan');
-		//$gjkec = $get->gjkec;
-		//unlink('assets/unggah/gjson/'.$gjkec);
+		$db->where('idkub', $_GET['id']);
+		$get = $db->ObjectBuilder()->getOne('kuburan');
+		$marker = $get->marker;
+		unlink('assets/unggah/marker/'.$marker);
 		// end of deleted file inside thr folder
 		
 		$db->where('idkub', $_GET['id']);
-		$exec = $db->delete('kuburan');
+		$exec = $db->delete("kuburan");
 		$info = '<div class="alert alert-success alert-dismissible" style="width:500px;">
                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                   <i class="icon fas fa-check"></i>data has been deleted
@@ -275,14 +283,15 @@
 							?>
 								<tr>
 											
-									<td><?= $no; ?></td>
-									<td><?= $row->nama; ?></td>
-									<td><?= $row->namakub; ?></td>
-									<td><?= $row->alamat; ?></td>
-									<td><?= $row->lat; ?></td>
-									<td><?= $row->lng; ?></td>
-									<td><?= $row->deskripsi; ?></td>
-									<td><?= $row->marker; ?></td>
+									<td class="text-center"><?= $no ?></td>
+									<td class="text-center"><?= $row->nama ?></td>
+									<td class="text-center"><?= $row->namakub ?></td>
+									<td><?= $row->alamat ?></td>
+									<td class="text-center"><?= $row->lat ?></td>
+									<td class="text-center"><?= $row->lng ?></td>
+									<td><?= $row->deskripsi ?></td>
+									<td class="text-center"><?= ($row->marker == ''?'-':'<img src="'.assets('unggah/marker/'.$row->marker).'" width="40px">') ?></td>
+									
 									<td>
 										
 										<a href="<?= url($url. '&edit&id=' .$row->idkub)?>" class="btn btn-info"><i class="fa fa-edit"></i></a>

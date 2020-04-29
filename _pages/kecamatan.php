@@ -11,6 +11,16 @@
 		if ($file != false) {
 			
 			$data['gjkec'] = $file;
+
+			if($_POST['idkec']!='') {
+
+				// delete file from folder
+				$db->where('idkec',$_GET['id']);
+				$get = $db->ObjectBuilder()->getOne('kecamatan');
+				$gjkec = $get->gjkec;
+				unlink('assets/unggah/gjson/'.$gjkec);
+				//end of delete file from folder
+			}
 		}
 		
 		if ($_POST['idkec'] == '') {

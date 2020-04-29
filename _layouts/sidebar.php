@@ -71,7 +71,7 @@
 							
 							<li class="nav-item">
 
-								<a href="#" class="nav-link">
+								<a href="<?= url('almarhum') ?>" class="nav-link">
 	    					
 									<i class="nav-icon fas fa-user"></i>
 	    							<p>Almarhum / almarhumah</p>
@@ -80,7 +80,7 @@
 
 							<li class="nav-item">
 
-								<a href="#" class="nav-link">
+								<a href="<?= url('kontur') ?>" class="nav-link">
 	    					
 									<i class="nav-icon fas fa-tree"></i>
 	    							<p>Tanah</p>

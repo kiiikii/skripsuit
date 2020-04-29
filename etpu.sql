@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 14, 2020 at 05:48 AM
+-- Generation Time: Apr 28, 2020 at 08:37 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.3.15
 
@@ -40,6 +40,30 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`idad`, `namauser`, `sandiuser`) VALUES
 (1, 'admin', '12345');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jenazah`
+--
+
+CREATE TABLE `jenazah` (
+  `idje` int(11) NOT NULL,
+  `idkub` int(11) NOT NULL,
+  `namaje` varchar(100) NOT NULL,
+  `lahir` date NOT NULL,
+  `mati` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `jenazah`
+--
+
+INSERT INTO `jenazah` (`idje`, `idkub`, `namaje`, `lahir`, `mati`) VALUES
+(1, 1, 'adfasdfasdfasdf', '2009-01-05', '2020-03-13'),
+(2, 2, 'asdfgfdsdf', '2008-07-10', '2020-03-13'),
+(3, 3, 'adasd', '2020-04-24', '2020-04-24'),
+(4, 2, 'dafsdfasdfasdf', '2020-04-25', '2020-04-25');
 
 -- --------------------------------------------------------
 
@@ -88,9 +112,23 @@ CREATE TABLE `kuburan` (
 --
 
 INSERT INTO `kuburan` (`idkub`, `idkec`, `namakub`, `alamat`, `lat`, `lng`, `deskripsi`, `marker`) VALUES
-(1, 1, 'TPU Bonoloyo', 'Jl. Sumpah Pemuda, Kadipiro, Kec. Banjarsari, Kota Surakarta, Jawa Tengah 57136', -7.538867, 110.824203, '<p>TPU Bonoloyo merupakan salah satu TPU terbesar di Surakarta yang lokasinya berada di Kadipiro berdekatan dengan Kampus UNISRI dan kantor Kecamatan Banjarsari</p>', ''),
-(2, 1, 'Astana Bibis Luhur', ' Jl. Walanda Maramis No.56, Nusukan, Kec. Banjarsari, Kota Surakarta, Jawa Tengah 57135', -7.547939, 110.831863, '<p><span style=\"color: rgb(51, 51, 51); font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif; font-size: 14px;\">Makam Kerabat Mangkunegara</span><br style=\"color: rgb(51, 51, 51); font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif; font-size: 14px;\"><span style=\"color: rgb(51, 51, 51); font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif; font-size: 14px;\">Makam Kyai Setroketu dan kerabat Mangkunegara lainnya.</span><br></p>', ''),
-(3, 1, 'Astana Oetara', 'Nusukan, Kec. Banjarsari, Kota Surakarta, Jawa Tengah 57135', -7.548031, 110.821365, '<p>nothing to display</p>', '');
+(1, 1, 'TPU Bonoloyo', 'Jl. Sumpah Pemuda, Kadipiro, Kec. Banjarsari, Kota Surakarta, Jawa Tengah 57136', -7.538867, 110.824203, '<p>TPU Bonoloyo merupakan salah satu TPU terbesar di Surakarta yang lokasinya berada di Kadipiro berdekatan dengan Kampus UNISRI dan kantor Kecamatan Banjarsari</p>', '9240420032202.png'),
+(2, 1, 'Astana Bibis Luhur', ' Jl. Walanda Maramis No.56, Nusukan, Kec. Banjarsari, Kota Surakarta, Jawa Tengah 57135', -7.547939, 110.831863, '<p><span style=\"color: rgb(51, 51, 51); font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif; font-size: 14px;\">Makam Kerabat Mangkunegara</span><br style=\"color: rgb(51, 51, 51); font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif; font-size: 14px;\"><span style=\"color: rgb(51, 51, 51); font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif; font-size: 14px;\">Makam Kyai Setroketu dan kerabat Mangkunegara lainnya.</span><br></p>', '61250420124150.png'),
+(3, 1, 'Astana Oetara', 'Nusukan, Kec. Banjarsari, Kota Surakarta, Jawa Tengah 57135', -7.548031, 110.821365, '<p>nothing to display</p>', '78250420020442.png'),
+(4, 5, 'TPU Mojo', 'asdfasdfasdfasdf', -7.538130, 110.831863, '<p>dsafasdfasdfasdf</p>', '69250420050426.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lahan`
+--
+
+CREATE TABLE `lahan` (
+  `idlahan` int(11) NOT NULL,
+  `idkub` int(11) NOT NULL,
+  `luas` varchar(100) NOT NULL,
+  `gbrlahan` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
@@ -101,6 +139,12 @@ INSERT INTO `kuburan` (`idkub`, `idkec`, `namakub`, `alamat`, `lat`, `lng`, `des
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`idad`);
+
+--
+-- Indexes for table `jenazah`
+--
+ALTER TABLE `jenazah`
+  ADD PRIMARY KEY (`idje`);
 
 --
 -- Indexes for table `kecamatan`
@@ -115,6 +159,12 @@ ALTER TABLE `kuburan`
   ADD PRIMARY KEY (`idkub`);
 
 --
+-- Indexes for table `lahan`
+--
+ALTER TABLE `lahan`
+  ADD PRIMARY KEY (`idlahan`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -123,6 +173,12 @@ ALTER TABLE `kuburan`
 --
 ALTER TABLE `admin`
   MODIFY `idad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `jenazah`
+--
+ALTER TABLE `jenazah`
+  MODIFY `idje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `kecamatan`
@@ -134,7 +190,13 @@ ALTER TABLE `kecamatan`
 -- AUTO_INCREMENT for table `kuburan`
 --
 ALTER TABLE `kuburan`
-  MODIFY `idkub` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idkub` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `lahan`
+--
+ALTER TABLE `lahan`
+  MODIFY `idlahan` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
