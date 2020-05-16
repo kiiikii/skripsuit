@@ -5,10 +5,11 @@
     $url = "profile";
 
     // logic for Update ADMIN
-
+    $data = $db->ObjectBuilder()->getOne('admin');
+    
 ?>
 
-<?= profile_open('Admin Profile') ?>
+		<?= profile_open('Admin Profile') ?>
                             
                         <!-- Profile Image -->
                         <div class="card card-primary card-outline">
@@ -21,8 +22,6 @@
 							    </div>
 			
 							    <h3 class="profile-username text-center"><?= $ses->get('namauser') ?></h3>
-			
-							    <p class="text-muted text-center">Software Engineer</p>
 						    </div>
 						    <!-- /.card-body -->
 						</div>
@@ -42,21 +41,27 @@
 								<strong><i class="fas fa-book mr-1"></i> Education</strong>
 			
 								<p class="text-muted">
-							
-									B.S. in Computer Science from the University of Tennessee at Knoxville
+
+									<?= $data->edukasi ?>
 								</p>
 			
 								<hr>
 			
 								<strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
 			
-								<p class="text-muted">Malibu, California</p>
+								<p class="text-muted">
+
+									<?= $data->lokasi ?>
+								</p>
 			
 								<hr>
 			
 								<strong><i class="far fa-file-alt mr-1"></i> Experience</strong>
 			
-								<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+								<p class="text-muted">
+
+									<?= $data->pengalaman ?>
+								</p>
 							</div>
 							<!-- /.card-body -->
 						</div>
@@ -84,7 +89,7 @@
 
 									<div class="active tab-pane">
 								
-										<form method="post" class="form-horizontal" enctype="multipart/form-data">
+										<form class="form-horizontal">
 								  
 											<div class="form-group row">
 											
@@ -92,7 +97,7 @@
 												
 												<div class="col-sm-10">
 												
-													<?= input_text('', '', '', 'required') ?>
+													<?= $data->namauser ?>
 												</div>
 											</div>
 											  
@@ -102,10 +107,79 @@
 									
 												<div class="col-sm-10">
 									
-													<?= input_text('', '', '', 'required') ?>
+													<?= $data->edukasi ?>
 												</div>
 											</div>
 								
+											<div class="form-group row">
+								
+												<label for="inputName2" class="col-sm-2 col-form-label">Location</label>
+								
+												<div class="col-sm-10">
+									
+													<?= $data->lokasi ?>
+												</div>
+											</div>
+
+											<div class="form-group row">
+
+												<label for="inputExperience" class="col-sm-2 col-form-label">Experience</label>
+
+												<div class="col-sm-10">
+												
+													<?= $data->pengalaman ?>
+												</div>
+											</div>
+
+								  			<div class="form-group row">
+											
+												<div class="offset-sm-2 col-sm-10">
+									
+													<a href="#modal-fade2" class="btn btn-info" data-toggle="modal" title="Edit Profile"><i class="fa fa-edit"></i></a>
+
+													<span class="col-md-12">
+						
+														<a href="<?= url('beranda') ?>" class="btn btn-danger"><i class="fa fa-reply"></i></a>
+													</span>
+												</div>
+								  			</div>
+										</form>
+									</div>
+									<!-- /.tab-pane -->
+								</div>
+								<!-- /.tab-content -->
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.nav-tabs-custom -->
+
+						<!-- Modal -->
+						<div id="modal-fade2" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+							
+							<div class="modal-dialog">
+								
+								<div class="modal-content">
+									
+									<div class="modal-header">
+										
+										<h2 class="modal-title">Update Profile</h2>
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									</div>
+
+									<div class="modal-body">
+
+										<form method="post" class="form-horizontal" enctype="multipart/form-data">
+										
+											<div class="form-group row">
+
+												<label for="inputPicture" class="col-sm-2 col-form-label">Picture</label>
+													
+												<div class="col-sm-10">
+
+													<?= input_file('', '') ?>
+												</div>
+											</div>
+
 											<div class="form-group row">
 								
 												<label for="inputName2" class="col-sm-2 col-form-label">Location</label>
@@ -125,36 +199,9 @@
 													<?= textarea('', '', 'textarea', 'style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #000000; padding: 10px;"', 'required') ?>
 												</div>
 											</div>
-
-											<div class="form-group row">
-
-												<label for="inputPicture" class="col-sm-2 col-form-label">Picture</label>
-												
-												<div class="col-sm-10">
-
-													<?= input_file('', '') ?>
-												</div>
-											</div>
-
-								  			<div class="form-group row">
-											
-												<div class="offset-sm-2 col-sm-10">
-									
-													<button type="submit" class="btn btn-danger"><i class="fa fa-save"></i></button>
-
-													<span class="col-md-12">
-						
-														<a href="<?= url('beranda') ?>" class="btn btn-danger"><i class="fa fa-reply"></i></a>
-													</span>
-												</div>
-								  			</div>
 										</form>
 									</div>
-									<!-- /.tab-pane -->
 								</div>
-								<!-- /.tab-content -->
 							</div>
-							<!-- /.card-body -->
 						</div>
-						<!-- /.nav-tabs-custom -->
-<?= profile_close() ?>
+		<?= profile_close() ?>

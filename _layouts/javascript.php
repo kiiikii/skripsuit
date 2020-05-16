@@ -45,34 +45,29 @@
 
 <!-- page script -->
 <script type="text/javascript">
-	
-	$(function () {
 
+	$(function () {
 		// DataTable
 	    $("#kuburan").DataTable({
 	    	"responsive": true,
 	    	"autoWidth": false,
 	    });
-
 		$("#jenazah").DataTable({
 	    	"responsive": true,
 	    	"autoWidth": false,
 	    });
-
 		$("#tnh").DataTable({
 	    	"responsive": true,
 	    	"autoWidth": false,
 	    });
-
 	    // Summernote
     	$('.textarea').summernote();
-
 	    //-------------
 	    //- DONUT CHART -
 	    //-------------
 	    // Get context with jQuery - using jQuery's .get() method.
 	    var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
-	    var donutData = {
+	   	var donutData = {
 	    	labels: [
 	        	'Chrome', 
 	          	'IE',
@@ -97,12 +92,10 @@
 	    	data: donutData,
 	    	options: donutOptions      
 	    });
-
 	   /*
      	* DONUT CHART
      	* -----------
      	*/
-
     	var donutData = [
     		{
 	        	label: 'Series1',
@@ -148,12 +141,10 @@
 	     * ---------------
 	     */
 	});
-
 	/*
 	 * Custom Label formatter
 	 * ----------------------
 	 */
-  	
   	function labelFormatter(label, series) {
     	return '<div style="font-size:13px; text-align:center; padding:2px; color: #fff; font-weight: 600;">'
     		+ label

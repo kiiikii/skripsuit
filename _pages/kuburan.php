@@ -290,7 +290,7 @@
 									<td class="text-center"><?= $row->lat ?></td>
 									<td class="text-center"><?= $row->lng ?></td>
 									<td><?= $row->deskripsi ?></td>
-									<td class="text-center"><?= ($row->marker == ''?'-':'<img src="'.assets('unggah/marker/'.$row->marker).'" width="40px">') ?></td>
+									<td class="text-center"><?= ($row->marker == ''?'-':'<img src="'.assets('unggah/marker/'.$row->marker).'" width="50px">') ?></td>
 									
 									<td>
 										
