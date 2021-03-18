@@ -1,19 +1,12 @@
 <?php 
-	
 	$title = "Kuburan";
 	$judul = $title;
 	$url = "kuburan";
-
 	if (isset($_POST['save'])) {
-
-		$file = upload('marker', 'marker');
-		
-		if ($file != false) {
-			
+		$file = upload('marker', 'marker');		
+		if ($file != false) {			
 			$data['marker'] = $file;
-
 			if($_POST['idkub']!='') {
-
 				// delete file inside a folder
 				$db->where('idkub', $_GET['id']);
 				$get = $db->ObjectBuilder()->getOne('kuburan');
@@ -22,24 +15,19 @@
 				// end of delete file inside a folder
 			}
 		}
-
 		$data['idkec'] = $_POST['idkec'];
 		$data['namakub'] = $_POST['namakub'];
 		$data['alamat'] = $_POST['alamat'];
 		$data['lat'] = $_POST['lat'];
 		$data['lng'] = $_POST['lng'];
 		$data['deskripsi'] = $_POST['deskripsi'];
-
-		if ($_POST['idkub'] == "") {
-			
+		if ($_POST['idkub'] == "") {			
 			$exec = $db->insert("kuburan", $data);
 			$info = '<div class="alert alert-success alert-dismissible" style="width:500px;">
                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                   <i class="icon fas fa-check"></i>data has been added
                 </div>';
-
 		} else {
-
 			$db->where('idkub', $_POST['idkub']);
 			$exec = $db->update("kuburan", $data);
 			$info = '<div class="alert alert-success alert-dismissible" style="width:500px;">
@@ -47,33 +35,24 @@
                   <i class="icon fas fa-check"></i>data has been updated
                 </div>';
 		}
-
-		if ($exec) {
-			
+		if ($exec) {		
 			$ses->set('info', $info);
-
 		} else {
-
 			$ses->set("info", '<div class="alert alert-danger alert-dismissible" style="width:500px;">
                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                   <i class="icon fas fa-check"></i>failed to process
                 </div>');
 		}
-
 		redirect(url($url));
 	}
-
 	if (isset($_GET['delete'])) {
-
 		$setTemplate = false;
-
 		// delete file inside the folder
 		$db->where('idkub', $_GET['id']);
 		$get = $db->ObjectBuilder()->getOne('kuburan');
 		$marker = $get->marker;
 		unlink('assets/unggah/marker/'.$marker);
 		// end of deleted file inside thr folder
-		
 		$db->where('idkub', $_GET['id']);
 		$exec = $db->delete("kuburan");
 		$info = '<div class="alert alert-success alert-dismissible" style="width:500px;">
@@ -81,23 +60,17 @@
                   <i class="icon fas fa-check"></i>data has been deleted
                 </div>';
 
-        if ($exec) {
-			
+    if ($exec) {			
 			$ses->set('info', $info);
-
 		} else {
-
 			$ses->set("info", '<div class="alert alert-danger alert-dismissible" style="width:500px;">
                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                   <i class="icon fas fa-check"></i>failed to process
                 </div>');
 		}
-
 		redirect(url($url));
 	}
-
-	if (isset($_GET['add']) OR isset($_GET['edit'])) {
-	
+	if (isset($_GET['add']) OR isset($_GET['edit'])) {	
 		$idkub = "";
 		$idkec = "";
 		$namakub = "";
@@ -106,14 +79,11 @@
 		$lng = "";
 		$deskripsi = "";
 		$marker = "";
-
-		if (isset($_GET['edit']) AND isset($_GET['id'])) {
-			
+		if (isset($_GET['edit']) AND isset($_GET['id'])) {		
 			$id = $_GET['id'];
 			$db->where('idkub', $id);
 			$row = $db->ObjectBuilder()->getOne('kuburan');
-			if ($db->count>0) {
-				
+			if ($db->count>0) {				
 				$idkub = $row->idkub;
 				$idkec = $row->idkec;
 				$namakub = $row->namakub;
